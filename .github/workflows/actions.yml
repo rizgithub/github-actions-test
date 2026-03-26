@@ -10,10 +10,10 @@ jobs:
         run: | 
           pwd
           ls -la
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
-          echo "{{ github.token }}"
+          echo $GITHUB_SHA >> $GITHUB_STATE
+          echo $GITHUB_REPOSITORY >> $GITHUB_STATE
+          echo $GITHUB_WORKSPACE >> $GITHUB_STATE
+          echo "{{ github.token }}" >> $GITHUB_STATE
           # git clone git@github:rizgithub:$GITHUB_REPOSTORY
           # git checkout $GITHUB_SHA
       - name: Checkout
@@ -28,4 +28,4 @@ jobs:
         with: 
           who-to-greet: Rizwan
       - name: Log Greeting time
-        run: echo "${{ steps.greet.outputs.time}}"
+        run: echo "${{ steps.greet.outputs.time}}" >> $GITHUB_STATE
